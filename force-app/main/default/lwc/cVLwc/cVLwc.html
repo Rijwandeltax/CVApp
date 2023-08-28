@@ -1,0 +1,78 @@
+<!--
+  @description       : cVLwc.html
+  @author            : MohmmadZuber@gmail.com
+  @group             : zuber
+  @last modified on  : 07-27-2023
+  @last modified by  : MohmmadZuber@gmail.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-27-2023   MohmmadZuber@gmail.com            Initial Version | Story Number
+-->
+<template>
+	<div style="background-color:#ffffff;">
+		<div if:true={showSpinner}>
+			<lightning-spinner variant="brand" alternative-text="Uploading......">
+			</lightning-spinner>
+		</div>
+		<!------header------->
+		<lightning-layout multiple-rows>
+			<lightning-layout-item size="12" padding="around-small">
+				<article class="slds-card">
+					<div class="slds-card__header slds-grid">
+						<header class="slds-media slds-media_center slds-has-flexi-truncate">
+							<div class="slds-media__figure">
+								<lightning-icon icon-name="action:user" alternative-text="Preview" title="user">
+								</lightning-icon>
+							</div>
+							<div class="slds-media__body">
+								<h2 class="slds-card__header-title">
+									<span><template if:true={data}>
+                {data.FirstName} {data.LastName}</template></span>
+								</h2>
+								<span><template if:true={data}>
+            { data.Title} <br></template></span>
+							</div>
+							<div class="slds-no-flex">
+								<button class="slds-button slds-button_neutral" onclick={openModal}>Edit</button>
+							</div>
+						</header>
+					</div>
+				</article>
+			</lightning-layout-item>
+		</lightning-layout>
+
+		<lightning-layout multiple-rows>
+			<lightning-layout-item size="4" padding="around-small">
+				<!-- Child Component CVPorfileLwc -->
+				<c-c-v-Porfile-lwc record-id={recordId}></c-c-v-Porfile-lwc>
+				<br>
+				<!-- Child Component CVContactLwc -->
+				<c-c-v-contact-lwc record-id={recordId} onchildmethod={callFromChild}></c-c-v-contact-lwc>
+				<br>
+				<!-- Child Component CVSocialLwc -->
+				<c-c-v-social-Lwc record-id={recordId}></c-c-v-social-Lwc>
+				<br>
+				<c-c-v-Superbadge-lwc record-id={recordId}></c-c-v-Superbadge-lwc>
+				<br>
+				<!-- Child Component CVkeyExpertisesLwc -->
+				<c-c-v-key-expertises-Lwc record-id={recordId}></c-c-v-Key-Expertises-Lwc>
+				<br>
+				<!-- Child Component CVReferenceLwc -->
+				<c-c-v-reference-lwc record-id={recordId}></c-c-v-reference-lwc>
+			</lightning-layout-item>
+			<lightning-layout-item size="8" padding="around-small">
+				<!-- Child Component CVCertificationsLwc -->
+				<c-c-v-certifications-lwc record-id={recordId}></c-c-v-certifications-lwc>
+				<br>
+				<!-- Child Component CVWorkExperiencesLwc -->
+				<c-c-v-work-experiences-lwc record-id={recordId}></c-c-v-work-experiences-lwc>
+				<br>
+				<!-- Child Component CVEducationLwc -->
+				<c-c-v-education-lwc record-id={recordId}></c-c-v-education-lwc>
+				<br>
+				<!-- Child Component ChartCvLwc -->
+				<c-chart-cv-lwc record-id={recordId}></c-chart-cv-lwc>
+			</lightning-layout-item>
+		</lightning-layout>
+	</div>
+</template>

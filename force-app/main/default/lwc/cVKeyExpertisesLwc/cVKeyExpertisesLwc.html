@@ -1,0 +1,12 @@
+<template>
+	<lightning-card title="Key Expertises" icon-name="standard:skill" variant="narrow">
+	<lightning-layout multiple-rows="true">
+		<template for:each={data} for:item="exp">
+			<lightning-layout-item key={exp.Id} size="6" padding="around-small" class="slds-text-align_center">
+				<c-progress-circle value={exp.Score_Out_of_100__c} label={exp.Name}></c-progress-circle>
+			</lightning-layout-item>
+		</template>
+	</lightning-layout>
+	<lightning-button label="Edit" slot="actions" onclick={keyExpertiseOpen}></lightning-button>
+	</lightning-card>
+</template>

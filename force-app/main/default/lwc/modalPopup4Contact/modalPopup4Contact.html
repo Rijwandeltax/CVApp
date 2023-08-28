@@ -1,0 +1,39 @@
+<!--
+  @description       : modalPopup4Contact.html
+  @author            : MohmmadZuber@gmail.com
+  @group             : zuber
+  @last modified on  : 07-27-2023
+  @last modified by  : MohmmadZuber@gmail.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-27-2023   MohmmadZuber@gmail.com            Initial Version | Story Number
+-->
+<template>
+	<lightning-record-edit-form record-id={recordId} object-api-name="Contact" onsuccess={handleSuccess}>
+		<lightning-modal-header label={content}></lightning-modal-header>
+		<lightning-modal-body>
+			<div class="slds-modal__content modalBodySpinner">
+				<!---Spinner--->
+				<template if:true={showLoading}>
+					<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+					</lightning-spinner>
+				</template>
+				<div class="slds-p-around_small">
+					<lightning-messages> </lightning-messages>
+					<lightning-input-field field-name="Email"> </lightning-input-field>
+					<lightning-input-field field-name="Address__c"> </lightning-input-field>
+					<lightning-input-field field-name="Phone"> </lightning-input-field>
+				</div>
+			</div>
+		</lightning-modal-body>
+		<lightning-modal-footer>
+			<!---footer--->
+			<div class="slds-m-top_small slds-align_absolute-center">
+				<lightning-button variant="Neutral" label="Close" class="slds-m-left_x-small" onclick={handleClose}>
+				</lightning-button>
+				<lightning-button variant="brand" class="slds-m-left_x-small" label="Save" onclick={handleSave}>
+				</lightning-button>
+			</div>
+		</lightning-modal-footer>
+	</lightning-record-edit-form>
+</template>

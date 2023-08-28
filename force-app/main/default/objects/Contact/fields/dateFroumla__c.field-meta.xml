@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>dateFroumla__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF((MONTH(Birthdate ) + (12*(YEAR(Birthdate )-YEAR(Date__c )) - MONTH(Date__c ))) == 1, Today(), Today()+3)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>dateFroumla</label>
+    <required>false</required>
+    <type>Date</type>
+</CustomField>

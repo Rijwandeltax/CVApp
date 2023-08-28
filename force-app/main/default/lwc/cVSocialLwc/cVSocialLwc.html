@@ -1,0 +1,39 @@
+<!--
+  @description       : cVSocialLwc.html
+  @author            : MohmmadZuber@gmail.com
+  @group             : zuber
+  @last modified on  : 07-27-2023
+  @last modified by  : MohmmadZuber@gmail.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-27-2023   MohmmadZuber@gmail.com            Initial Version | Story Number
+-->
+<template>
+	<!------Spinner------->
+	<div if:true={showSpinner}>
+		<lightning-spinner variant="brand" alternative-text="Uploading......">
+		</lightning-spinner>
+	</div>
+	<lightning-card title="Social Handles" icon-name="standard:social" variant="narrow">
+		<p class="slds-p-horizontal_medium">
+			<template for:each={data} for:item="handle">
+				<lightning-layout key={handle.key}>
+					<lightning-layout-item size="2" padding="around-small">
+						<img src={handle.Handle_Icon__c} height="50px" width="34px" />
+					</lightning-layout-item>
+						<lightning-layout-item size="2" padding="around-small">
+							<div class="slds-no-flex">
+								<a href={handle.Handle_Link__c} target="_blank">
+									{handle.Handle_Link__c}
+								</a>
+							</div>
+							<div class="slds-text-body_small">
+								<b> {handle.Name}</b>
+							</div>
+						</lightning-layout-item>
+				</lightning-layout>
+			</template>
+		</p>
+		<lightning-button label="Edit" slot="actions" onclick={socialHandelModPopOpen}></lightning-button>
+	</lightning-card>
+</template>

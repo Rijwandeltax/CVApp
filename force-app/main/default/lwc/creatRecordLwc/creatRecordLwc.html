@@ -1,0 +1,347 @@
+<template>
+	<div style="background-color:white;">
+		<!-- Header -->
+		<div class="slds-card__header slds-p-bottom_small">
+			<header>
+				<lightning-progress-indicator current-step={currentStep} type="base" has-error="true" variant="base">
+					<lightning-progress-step label="First Page" value="1" onclick={handleCreate}>
+					</lightning-progress-step>
+					<lightning-progress-step label="Second Page" value="2" onclick={handleCreate1}>
+					</lightning-progress-step>
+					<lightning-progress-step label="Third Page" value="3" onclick={handleCreate2}>
+					</lightning-progress-step>
+					<lightning-progress-step label="four Page" value="4" onclick={handleCreate3}>
+					</lightning-progress-step>
+					<lightning-progress-step label="five Page" value="5" onclick={handleCreate4}>
+					</lightning-progress-step>
+					<lightning-progress-step label="six Page" value="6" onclick={handleCreate5}>
+					</lightning-progress-step>
+					<lightning-progress-step label="seven Page" value="7" onclick={handleCreate6}>
+					</lightning-progress-step>
+					<lightning-progress-step label="eight Page" value="8" onclick={handleCreate7}>
+					</lightning-progress-step>
+					<lightning-progress-step label="nine Page" value="9" onclick={handleCreate8}>
+					</lightning-progress-step>
+				</lightning-progress-indicator>
+			</header>
+		</div>
+		<!-- /Header -->
+		<lightning-layout multiple-rows>
+			<lightning-layout-item size="2" padding="around-small">
+			</lightning-layout-item>
+			<lightning-layout-item size="8" padding="around-small">
+
+				<template if:true={showContact}>
+					<lightning-card title="Contact information" icon-name="standard:contact">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="First Name" value='' data-field="FirstName" class="slds-m-bottom_x-small"
+								required>
+							</lightning-input>
+							<lightning-input label="Last Name" value='' data-field="LastName" class="slds-m-bottom_x-small"
+								required>
+							</lightning-input>
+							<lightning-input label="Title" value='' data-field="Title" class="slds-m-bottom_x-small"
+								required>
+							</lightning-input>
+							<lightning-input label="Photo URL" value='' data-field="Photo_URL__c"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Profile" value='' data-field="Profile__c"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Phone Number" value='' data-field="Phone"
+								class="slds-m-bottom_x-small" pattern="[0-9]{3}[0-9]{3}[0-9]{4}$"
+								message-when-pattern-mismatch="Please enter a valid phone number" required>
+							</lightning-input>
+							<lightning-input label="Email" value='' type="email" data-field="Email" class="validate"
+								pattern="[A-Za-z0-9._-]+@[a-z0-9-]+\.[a-z]{2,}$"
+								message-when-pattern-mismatch="Please enter a valid email" required>
+							</lightning-input>
+							<lightning-input label="Full Address" value='' data-field="Address__c" required>
+							</lightning-input>
+							<br>
+							<div class="slds-align_absolute-center">
+								<button class="slds-button slds-button_neutral" onclick={navigateToHomePage}>Cancel</button>
+								<button class="slds-button slds-button_brand" onclick={handleCreate}>Next</button>
+							</div>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={showcertficashon}>
+					<lightning-card title="Certification information" icon-name="standard:reward">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Certification Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Order" value='' data-field="Order__c" class="validate" type="number"
+								min="1" max="10" message-when-range-overflow="Please enter a correct Order"
+								message-when-range-underflow="Please enter a correct order" required>
+							</lightning-input>
+							<lightning-input label="Release" value='' data-field="Release__c" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<div class="slds-align_absolute-center">
+								<button class="slds-button slds-button_neutral" onclick={handleReset}>Cancel</button>
+								<button class="slds-button slds-button_brand" onclick={handleSaveNew1}>Save & New</button>
+								<button class="slds-button slds-button_brand" onclick={handleCreate1}>Save & Next</button>
+							</div>
+						</div>
+						<div class="slds-align_absolute-center">
+							<a href="#" class="next" onclick={handelskip}>Skip &raquo;</a>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={ShowWorkExp}>
+					<lightning-card title="Work Experience information" icon-name="standard:merge">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Work Experience Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Duration" value='' data-field="Duration__c" required>
+							</lightning-input>
+							<lightning-input label="Responsibilities" value='' data-field="Responsibilities__c"
+								required>
+							</lightning-input>
+							<lightning-input label="Company" value='' data-field="Company__c" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<lightning-button-group class="slds-align_absolute-center">
+								<lightning-button label="Cancel" variant="neutral" onclick={handleReset}
+									class="slds-m-left_x-small">
+								</lightning-button>
+								<lightning-button label="Save &amp; New" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleSaveNew2}></lightning-button>
+								<lightning-button label="Save & Next" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleCreate2}></lightning-button>
+							</lightning-button-group>
+						</div>
+						<div class="slds-align_absolute-center">
+							<a href="#" class="next" onclick={handelskip1}>Skip &raquo;</a>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={ShowCompetency}>
+					<lightning-card title="Competency information" icon-name="standard:product_service_campaign">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Competency Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Score" value='' data-field="Score1__c" class="validate" type="number"
+								min="1" max="100" message-when-range-overflow="Please enter a correct score"
+								message-when-range-underflow="Please enter a correct Score" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<lightning-button-group class="slds-align_absolute-center">
+								<lightning-button label="Cancel" variant="neutral" onclick={handleReset}
+									class="slds-m-left_x-small">
+								</lightning-button>
+								<lightning-button label="Save &amp; New" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleSaveNew3}></lightning-button>
+								<lightning-button label="Save & Next" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleCreate3}></lightning-button>
+							</lightning-button-group>
+						</div>
+						<div class="slds-align_absolute-center">
+							<a href="#" class="next" onclick={handelskip2}>Skip &raquo;</a>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={showEducation}>
+					<lightning-card title="Education information" icon-name="standard:education">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Education Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="School Name" value='' data-field="School_Name__c" required>
+							</lightning-input>
+							<lightning-input label="Duration" value='' data-field="Duration__c" required>
+							</lightning-input>
+							<lightning-input label="GPA" value='' data-field="GPA__c" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<lightning-button-group class="slds-align_absolute-center">
+								<lightning-button label="Cancel" variant="neutral" onclick={handleReset}
+									class="slds-m-left_x-small">
+								</lightning-button>
+								<lightning-button label="Save &amp; New" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleSaveNew4}></lightning-button>
+								<lightning-button label="Save & Next" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleCreate4}></lightning-button>
+							</lightning-button-group>
+						</div>
+						<div class="slds-align_absolute-center">
+							<a href="#" class="next" onclick={handelskip3}>Skip &raquo;</a>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={showKeyExpertise}>
+					<lightning-card title="Key Expertise information" icon-name="standard:customer_lifecycle_analytics">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Key Expertise Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Score Out of 100" value='' data-field="Score_Out_of_100__c"
+								class="validate" type="number" min="1" max="100"
+								message-when-range-overflow="Please enter a correct Score"
+								message-when-range-underflow="Please enter a correct Score" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<lightning-button-group class="slds-align_absolute-center">
+								<lightning-button label="Cancel" variant="neutral" onclick={handleReset}
+									class="slds-m-left_x-small">
+								</lightning-button>
+								<lightning-button label="Save &amp; New" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleSaveNew5}></lightning-button>
+								<lightning-button label="Save & Next" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleCreate5}></lightning-button>
+							</lightning-button-group>
+						</div>
+						<div class="slds-align_absolute-center">
+							<a href="#" class="next" onclick={handelskip4}>Skip &raquo;</a>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={showReference}>
+					<lightning-card title="Reference information" icon-name="standard:resource_preference">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Reference Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Company" value='' data-field="Company__c" required>
+							</lightning-input>
+							<lightning-input value='' data-field="Link__c" class="validate" type="email" label="Reference Link"
+								 required>
+							</lightning-input>
+							<lightning-input label="Relationship" value='' data-field="Relationship__c" required>
+							</lightning-input>
+							<lightning-input label="Photo URL" value='' data-field="Photo_URL__c" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<lightning-button-group class="slds-align_absolute-center">
+								<lightning-button label="Cancel" variant="neutral" onclick={handleReset}
+									class="slds-m-left_x-small">
+								</lightning-button>
+								<lightning-button label="Save &amp; New" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleSaveNew6}></lightning-button>
+								<lightning-button label="Save & Next" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleCreate6}></lightning-button>
+							</lightning-button-group>
+						</div>
+						<div class="slds-align_absolute-center">
+							<a href="#" class="next" onclick={handelskip5}>Skip &raquo;</a>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={showSocial}>
+					<lightning-card title="Social Handle information" icon-name="standard:social">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Social Handle Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Handle Link" value='' data-field="Handle_Link__c" required>
+							</lightning-input>
+							<lightning-input label="Handle Icon" value='' data-field="Handle_Icon__c" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<lightning-button-group class="slds-align_absolute-center">
+								<lightning-button label="Cancel" variant="neutral" onclick={handleReset}
+									class="slds-m-left_x-small">
+								</lightning-button>
+								<lightning-button label="Save &amp; New" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleSaveNew7}></lightning-button>
+								<lightning-button label="Save & Next" variant="Brand" class="slds-m-left_x-small"
+									onclick={handleCreate7}></lightning-button>
+							</lightning-button-group>
+						</div>
+						<div class="slds-align_absolute-center">
+							<a href="#" class="next" onclick={handelskip6}>Skip &raquo;</a>
+						</div>
+					</lightning-card>
+				</template>
+
+				<template if:true={TrailheadSuperbadge}>
+					<lightning-card title="Trailhead Superbadge information" icon-name="standard:trailhead_alt">
+						<template if:true={showLoading}>
+							<lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+							</lightning-spinner>
+						</template>
+						<div class="slds-m-around_medium">
+							<lightning-input label="Trailhead Superbadge Name" value='' data-field="Name"
+								class="slds-m-bottom_x-small" required>
+							</lightning-input>
+							<lightning-input label="Superbadge Image" value='' data-field="Superbadge_Image__c"
+								required>
+							</lightning-input>
+							<lightning-input label="Superbadge Link" value='' data-field="Superbadge_Link__c" required>
+							</lightning-input>
+							<lightning-input label="Superbadge Description" value=''
+								data-field="Superbadge_Description__c" required>
+							</lightning-input>
+							<lightning-input label="Contact" value={Contactid} data-field="Contact__c"
+								class="slds-hidden">
+							</lightning-input>
+							<lightning-button label="Finish" variant="brand" class="slds-align_absolute-center"
+								onclick={handleCreate8}>
+							</lightning-button>
+						</div>
+					</lightning-card>
+				</template>
+			</lightning-layout-item>
+			<lightning-layout-item size="1" padding="around-small">
+			</lightning-layout-item>
+		</lightning-layout>
+	</div>
+</template>

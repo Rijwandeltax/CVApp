@@ -1,0 +1,26 @@
+<!--
+  @description       : cVWorkExperiencesLwc.html
+  @author            : MohmmadZuber@gmail.com
+  @group             : zuber
+  @last modified on  : 07-27-2023
+  @last modified by  : MohmmadZuber@gmail.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-27-2023   MohmmadZuber@gmail.com            Initial Version | Story Number
+-->
+<template>
+	<lightning-card title="Work Experiences" icon-name="standard:account" variant="base">
+		<div class="slds-p-around_small">
+			<div class="slds-progress slds-progress_vertical slds-m-around_x-small">
+				<ol class="slds-progress__list">
+					<template for:each={data} for:item="item">
+						<c-work-exp key={item.key} work-icon="utility:salesforce1" work-title={item.first}
+							company={item.Company__c} designation={item.Name} duration={item.Duration__c}
+							responsibilities={item.Responsibilities__c}></c-work-exp>
+					</template>
+				</ol>
+			</div>
+		</div>
+		<lightning-button label="Edit" slot="actions" onclick={openWorek}></lightning-button>
+	</lightning-card>
+</template>

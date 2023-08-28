@@ -1,0 +1,18 @@
+<!--
+  @description       : chartCvLwc.html
+  @author            : MohmmadZuber@gmail.com
+  @group             : zuber
+  @last modified on  : 07-27-2023
+  @last modified by  : MohmmadZuber@gmail.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-27-2023   MohmmadZuber@gmail.com            Initial Version | Story Number
+-->
+<template>
+    <lightning-card title='Competency Chart'>
+      <div>
+        <canvas class="donut" lwc:dom="manual"></canvas>
+      </div>
+      <lightning-button label="Edit" slot="actions" onclick={openchartModalPopup}></lightning-button>
+    </lightning-card>
+</template>

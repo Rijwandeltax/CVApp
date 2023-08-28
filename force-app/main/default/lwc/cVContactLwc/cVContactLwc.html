@@ -1,0 +1,48 @@
+<!--
+  @description       : cVContactLwc.html
+  @author            : MohmmadZuber@gmail.com
+  @group             : zuber
+  @last modified on  : 07-27-2023
+  @last modified by  : MohmmadZuber@gmail.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-27-2023   MohmmadZuber@gmail.com            Initial Version | Story Number
+-->
+<template>
+	<!---Spinner--->
+	<div if:true={showSpinner}>
+		<lightning-spinner variant="brand" alternative-text="Uploading......">
+		</lightning-spinner>
+	</div>
+	<template if:true={data}>
+		<lightning-card title="Contact" icon-name="standard:call" variant="narrow">
+			<p class="slds-p-horizontal_medium">
+				<lightning-layout>
+					<lightning-layout-item size="1" padding="around-small">
+						<lightning-icon icon-name="utility:checkin" size="x-small"></lightning-icon>
+					</lightning-layout-item>
+					<lightning-layout-item size="11" padding="around-small">
+						{data.Address__c }
+					</lightning-layout-item>
+				</lightning-layout>
+				<lightning-layout>
+					<lightning-layout-item size="1" padding="around-small">
+						<lightning-icon icon-name="utility:email" size="x-small"></lightning-icon>
+					</lightning-layout-item>
+					<lightning-layout-item size="11" padding="around-small">
+						{data.Email}
+					</lightning-layout-item>
+				</lightning-layout>
+				<lightning-layout>
+					<lightning-layout-item size="1" padding="around-small">
+						<lightning-icon icon-name="utility:dialing" size="x-small"></lightning-icon>
+					</lightning-layout-item>
+					<lightning-layout-item size="11" padding="around-small">
+						{data.Phone}
+					</lightning-layout-item>
+				</lightning-layout>
+			</p>
+			<lightning-button label="Edit" slot="actions" onclick={openModal}></lightning-button>
+		</lightning-card>
+	</template>
+</template>

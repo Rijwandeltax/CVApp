@@ -1,0 +1,14 @@
+<template>
+	<lightning-card title="Competency Recored" icon-name="standard:contact">
+		<div class="slds-truncate">
+			<div class="slds-p-horizontal_small slds-p-vertical_x-small lgc-bg">
+				<template if:true={contacts.data}>
+					<lightning-datatable key-field="Id" data={contacts.data} columns={columns} onsave={handleSave}
+						draft-values={saveDraftValues} hide-checkbox-column="true" show-row-number-column='true'
+						onrowaction={callRowAction}>
+					</lightning-datatable>
+				</template>
+			</div>
+		</div>
+	</lightning-card>
+</template>

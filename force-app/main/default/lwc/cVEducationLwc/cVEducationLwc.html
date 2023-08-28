@@ -1,0 +1,14 @@
+<template>
+	<lightning-card title=" Educeshon Recored" icon-name="standard:social">
+		<div class="slds-truncate">
+			<div class="slds-p-horizontal_small slds-p-vertical_x-small lgc-bg">
+				<template if:true={data}>
+					<lightning-datatable key-field="Id" data={data} columns={columns} onsave={handleSave}
+						draft-values={saveDraftValues} hide-checkbox-column show-row-number-column>
+					</lightning-datatable>
+				</template>
+			</div>
+		</div>
+		<lightning-button label="Edit" slot="actions" onclick={openeducahsonModalPopup}></lightning-button>
+	</lightning-card>
+</template>

@@ -1,0 +1,214 @@
+<template>
+	<div class="slds-box slds-theme_shade">
+	<div if:true={showSpinner}>
+		<lightning-spinner variant="brand" alternative-text="Uploading......">
+		</lightning-spinner>
+	</div>
+	<!------header------->
+	<lightning-layout multiple-rows>
+		<lightning-layout-item size="12" padding="around-small">
+			<article class="slds-card">
+				<div class="slds-card__header slds-grid">
+					<header class="slds-media slds-media_center slds-has-flexi-truncate">
+						<div class="slds-media__figure">
+							<lightning-icon icon-name="action:user" alternative-text="Preview" title="user">
+							</lightning-icon>
+						</div>
+						<div class="slds-media__body">
+							<h2 class="slds-card__header-title">
+								<span><template if:true={data}>
+			           {data.FirstName} {data.LastName}</template></span>
+							</h2>
+							<span><template if:true={data}>
+			      { data.Title} <br></template></span>
+						</div>
+						<div class="slds-no-flex">
+							<button class="slds-button slds-button_neutral" onclick={openModal}>Edit</button>
+						</div>
+					</header>
+				</div>
+			</article>
+		</lightning-layout-item>
+	</lightning-layout>
+
+	<lightning-layout multiple-rows>
+		<lightning-layout-item size="4" padding="around-small">
+			<lightning-card title="Profile" icon-name="custom:custom111" variant="narrow">
+				<p class="slds-p-horizontal_medium">
+					<template if:true={data}>
+						<div class="slds-align_absolute-center" >
+						<img src={data.Photo_URL__c} alt="User Image" class="user"/>
+						</div>
+						<br>
+						<br>
+						<div class="slds-box slds-theme_shade">
+						<p><big>{data.Profile__c}</big></p>
+						</div>
+					</template>
+				</p>
+				<lightning-button label="Edit" slot="actions" onclick={openModal1}></lightning-button>
+			</lightning-card>
+			<br>
+			<template if:true={data}>
+				<lightning-card title="Contact" icon-name="standard:call" variant="narrow">
+					<p class="slds-p-horizontal_medium">
+						<lightning-layout>
+							<lightning-layout-item size="1" padding="around-small">
+								<lightning-icon icon-name="utility:checkin" size="x-small"></lightning-icon>
+							</lightning-layout-item>
+							<lightning-layout-item size="11" padding="around-small">
+								{data.Address__c }
+							</lightning-layout-item>
+						</lightning-layout>
+						<lightning-layout>
+							<lightning-layout-item size="1" padding="around-small">
+								<lightning-icon icon-name="utility:email" size="x-small"></lightning-icon>
+							</lightning-layout-item>
+							<lightning-layout-item size="11" padding="around-small">
+								{data.Email}
+							</lightning-layout-item>
+						</lightning-layout>
+						<lightning-layout>
+							<lightning-layout-item size="1" padding="around-small">
+								<lightning-icon icon-name="utility:dialing" size="x-small"></lightning-icon>
+							</lightning-layout-item>
+							<lightning-layout-item size="11" padding="around-small">
+								{data.Phone}
+							</lightning-layout-item>
+						</lightning-layout>
+					</p>
+					<lightning-button label="Edit" slot="actions" onclick={openContactModel4}></lightning-button>
+				</lightning-card>
+			</template>
+			<br>
+			<lightning-card title="Social Handles" icon-name="standard:social" variant="narrow">
+				<p class="slds-p-horizontal_medium">
+					<template for:each={socialhandle} for:item="handle">
+						<lightning-layout key={handle.key}>
+							<lightning-layout-item size="2" padding="around-small">
+								<img src={handle.Handle_Icon__c} height="50px" width="34px" />
+					</lightning-layout-item>
+								<lightning-layout-item size="2" padding="around-small">
+									<div class="slds-no-flex">
+										<a href={handle.Handle_Link__c} target="_blank">
+											{handle.Handle_Link__c}
+										</a>
+									</div>
+									<div class="slds-text-body_small">
+										<b> {handle.Name}</b>
+									</div>
+								</lightning-layout-item>
+						</lightning-layout>
+					</template>
+				</p>
+				<lightning-button label="Edit" slot="actions" onclick={socialHandelModPopOpen}></lightning-button>
+			</lightning-card>
+			<br>
+			<lightning-card title="" icon-name="" variant="base">
+				<div class="slds-p-around_small">
+					<template for:each={superbadge} for:item="item">
+
+						<div key={item.key}>
+							<lightning-layout multiple-rows>
+								<lightning-layout-item size="12" padding="around-small" small-device-size="5"
+									medium-device-size="6" large-device-size="5">
+									<img src={item.Superbadge_Image__c} />
+								</lightning-layout-item>
+							</lightning-layout>
+							<b>favorite Superbagge</b>
+							<br>
+							<br>
+							<a href={item.Superbadge_Link__c} target="blank">
+								<big>{item.Name}</big>
+							</a>
+							<p>{item.Superbadge_Description__c}</p>
+						</div>
+					</template>
+				</div>
+				<lightning-button label="Edit" slot="actions" onclick={SuperBadgOpen}></lightning-button>
+			</lightning-card>
+			<br>
+			<lightning-card title="Key Expertises" icon-name="standard:skill" variant="narrow">
+				<lightning-layout multiple-rows="true">
+					<template for:each={keye} for:item="exp">
+						<lightning-layout-item key={exp.Id} size="6" padding="around-small"
+							class="slds-text-align_center">
+							<c-progress-circle value={exp.Score_Out_of_100__c} label={exp.Name}></c-progress-circle>
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<lightning-button label="Edit" slot="actions" onclick={keyExpertiseOpen}></lightning-button>
+			</lightning-card>
+			<br>
+			<lightning-card title="Reference" icon-name="standard:queue" variant="narrow">
+				<p class="slds-p-horizontal_medium">
+					<template for:each={Reference} for:item="handle">
+						<lightning-layout key={handle.key}>
+							<lightning-layout-item size="2" padding="around-small">
+								<img src={handle.Photo_URL__c} />
+					</lightning-layout-item>
+								<lightning-layout-item size="7" padding="around-small">
+									<div class="slds-text-body_small">
+										<a href={handle.Link__c} target="blank">
+											<big>{handle.Name}</big>
+										</a>
+									</div>
+									<div class="slds-text-body_small">
+										<b>{handle.Company__c}</b>
+									</div>
+								</lightning-layout-item>
+								<lightning-layout-item size="2" padding="around-small" alignment-bump="right">
+									<b> {handle.Relationship__c}</b>
+								</lightning-layout-item>
+						</lightning-layout>
+					</template>
+				</p>
+				<lightning-button label="Edit" slot="actions" onclick={RefrencOpen}></lightning-button>
+			</lightning-card>
+		</lightning-layout-item>
+		<br>
+		<lightning-layout-item size="8" padding="around-small">
+			<lightning-card title="Certifications / Trailhead" icon-name="standard:reward" variant="base">
+				<div class="slds-p-around_small">
+					<template for:each={Certification} for:item="item">
+						<c-award key={item.key} award-icon="utility:salesforce1" award-title={item.Name}
+							award-subtitle={item.Release__c}></c-award>
+					</template>
+					<!--<c-award award-icon="utility:trailhead" award-title="Trailhead"
+					award-subtitle={totalTrailheadBadges}></c-award>-->
+				</div>
+				<lightning-button label="Edit" slot="actions" onclick={openCertification}></lightning-button>
+			</lightning-card>
+			<br>
+			<lightning-card title="Work Experiences" icon-name="standard:account" variant="base">
+				<div class="slds-p-around_small">
+					<div class="slds-progress slds-progress_vertical slds-m-around_x-small">
+						<ol class="slds-progress__list">
+							<template for:each={worekExpdata} for:item="item">
+
+								<c-work-exp key={item.key} work-icon="utility:salesforce1" work-title={item.first}				
+									company={item.Company__c} designation={item.Name} duration={item.Duration__c}
+									responsibilities={item.Responsibilities__c}></c-work-exp>
+							</template>
+						</ol>
+					</div>
+				</div>
+				<lightning-button label="Edit" slot="actions" onclick={openWorek}></lightning-button>
+			</lightning-card>
+			<br>
+			<lightning-card title=" Educeshon Recored" icon-name="standard:social">
+				<div class="slds-truncate">
+					<div class="slds-p-horizontal_small slds-p-vertical_x-small lgc-bg">
+						<template if:true={Education}>
+							<lightning-datatable key-field="Id" data={Education} columns={columns} onsave={handleSave}
+								draft-values={saveDraftValues} hide-checkbox-column show-row-number-column>
+							</lightning-datatable>
+						</template>
+					</div>
+				</div>
+				<lightning-button label="Edit" slot="actions" onclick={openeducahsonModalPopup}></lightning-button>
+			</lightning-card>
+		</lightning-layout-item>
+	</lightning-layout>
+	</div>
+</template>

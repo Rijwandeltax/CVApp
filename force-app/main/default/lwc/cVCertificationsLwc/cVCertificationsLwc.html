@@ -1,0 +1,13 @@
+<template>
+	<lightning-card title="Certifications / Trailhead" icon-name="standard:reward" variant="base">
+		<div class="slds-p-around_small">
+			<template for:each={data} for:item="item">
+				<c-award key={item.key} award-icon="utility:salesforce1" award-title={item.Name}
+					award-subtitle={item.Release__c}></c-award>
+			</template>
+			<!--<c-award award-icon="utility:trailhead" award-title="Trailhead"
+					award-subtitle={totalTrailheadBadges}></c-award>-->
+		</div>
+		<lightning-button label="Edit" slot="actions" onclick={openCertification}></lightning-button>
+	</lightning-card>
+</template>

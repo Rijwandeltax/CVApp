@@ -1,0 +1,31 @@
+<!--
+  @description       :  contactLIghtingDataTable.html
+  @author            : MohmmadZuber@gmail.com
+  @group             : zuber
+  @last modified on  : 07-27-2023
+  @last modified by  : MohmmadZuber@gmail.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-27-2023   MohmmadZuber@gmail.com            Initial Version | Story Number
+-->
+<template>
+	<lightning-card title="Contact Recored" icon-name="standard:contact">
+		<template if:true={contacts.data}>
+			<lightning-datatable key-field="Id" data={contacts.data} columns={columns} hide-checkbox-column="true"
+				show-row-number-column="true" onrowaction={callRowAction}>
+			</lightning-datatable>
+		</template>
+		<template if:true={error}>
+			{error}>
+		</template>
+	</lightning-card>
+	<br>
+	<br>
+	<!-- Child Component cVLwc -->
+	<template if:true={showcv}>
+		<c-c-v-lwc record-id={recordId} onchildmethod={callFromChild}></c-c-v-lwc>
+	</template>
+	<!-- Child Component 
+	<c-modal-Popup-Lwc ></c-modal-Popup-Lwc>
+	<-------------------->
+</template>
