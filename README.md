@@ -1,4 +1,4 @@
-#CV APP Demo
+#CV APP Demo => This App was developed by Zuber Dayer.
 
 
 
