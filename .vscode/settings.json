@@ -1,0 +1,10 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.sfdx": true
+  },
+  "workbench.colorCustomizations": {},
+  "atlascode.jira.enabled": false,
+  "atlascode.bitbucket.enabled": false
+}
